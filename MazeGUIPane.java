@@ -12,7 +12,7 @@ public class MazeGUIPane extends GridPane{
 	int colMax = 25;
 	Runner runner;
 	int bullTurns = 3;
-	int numBulls = 5;
+	int numBulls = 2;
 	int turnsBeforeRelease = 3;
 	int turnsLeft;
 	StreetMap map = new StreetMap(rowMax, colMax);
@@ -27,7 +27,7 @@ public class MazeGUIPane extends GridPane{
 		bulls = new Bull[numBulls];
 		for(int i = 0; i < numBulls; i++){
 			int tempRow = 1;
-			int tempCol = i + 2;
+			int tempCol = 2 * i + 2;
 			bulls[i] = new Bull(tempRow, tempCol);
 			map.getMap()[tempRow][tempCol].setType('B');
 			labels[tempRow][tempCol].getStyleClass().clear();
@@ -130,18 +130,20 @@ public class MazeGUIPane extends GridPane{
 	}
 	
 	private void checkTurns(){
-		System.out.println(turnsLeft);
 		turnsLeft--;
 		if(turnsLeft <= 0){
-			bullTurn();
-			turnsLeft = 1;
+			for(int i = 0; i < bullTurns; i++){
+				bullTurn();
+				turnsLeft = 1;
+			}
 		}
 	}
 
 	private void bullTurn(){
 //		System.out.println("Bulls go here!");
 		for(int i = 0; i < numBulls; i++){
-			bulls[i].takeTurn(runner, this);
+			if(!gameOver)
+				bulls[i].takeTurn(runner, this);
 		}
 	}
 	private void setUpLabel(final Label l, final int row, final int col) {
