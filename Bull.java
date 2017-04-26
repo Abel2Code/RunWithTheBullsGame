@@ -62,8 +62,8 @@ public class Bull {
 		}
 		
 		if(pos.getRow() == runner.getRow() && pos.getCol() == runner.getCol()){
-			System.out.println("Game Over, DO LATER");
 			maze.gameOver = true;
+			maze.gameResult.setText("You Lose");
 		}
 	}
 	

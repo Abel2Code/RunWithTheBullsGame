@@ -18,9 +18,11 @@ public class MazeGUIPane extends GridPane{
 	StreetMap map = new StreetMap(rowMax, colMax);
 	boolean gameOver = false;
 	Bull[] bulls;
+	Label gameResult;
 
-	public void startGame(){
+	public void startGame(Label mainLabel){
 		setUpLabels();
+		gameResult = mainLabel;
 		runner = new Runner(1, 1);
 		turnsLeft = turnsBeforeRelease;
 		gameOver = false;
@@ -98,7 +100,9 @@ public class MazeGUIPane extends GridPane{
 			gameOver = true;	
 			labels[tempRow][tempCol].getStyleClass().clear();
 			labels[tempRow][tempCol].getStyleClass().add("space");
-			System.out.println("You win, Do this the right way later");
+			//YOU WIN
+			gameResult.setText("You Win!");
+			
 		} else{
 			map.getMap()[tempRow][tempCol].setType(' ');
 			labels[tempRow][tempCol].getStyleClass().clear();

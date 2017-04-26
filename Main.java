@@ -17,14 +17,13 @@ import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 
 public class Main extends Application {
-	private Boolean gameStarted = false;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			MazeGUIPane maze = new MazeGUIPane();
 			BorderPane bp = new BorderPane();
-			Button temp = new Button("temp");
+			Label gameResult = new Label();
 
 			HBox title = new HBox();
 			HBox center = new HBox();
@@ -41,11 +40,21 @@ public class Main extends Application {
 			Button run = new Button("Run");
 			run.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 				public void handle(Event event) {
-					maze.startGame();
+					gameResult.setText("");
+					maze.startGame(gameResult);
 				}
 			});
-			
-			run.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+			bottom.getChildren().addAll(run, gameResult);
+			bottom.setAlignment(Pos.BOTTOM_CENTER);
+			title.getStyleClass().add("title");
+			center.getStyleClass().add("center");
+			bp.setTop(title);
+			bp.setCenter(center);
+			bp.setBottom(bottom);
+			Scene scene = new Scene(bp,650,650);
+			//Scene scene = new Scene(maze,500,600);
+			scene.getStylesheets().add("application/application.css");
+			scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
 				@Override
 				public void handle(KeyEvent event) {
 					if(!maze.gameOver){
@@ -61,29 +70,10 @@ public class Main extends Application {
 					}
 				}
 			});
-
-			/*Button reset = new Button("Reset");
-			reset.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
-				@Override
-				public void handle(Event event){
-					gameStarted = false;
-					maze.startGame();
-				}
-			});*/
-			bottom.getChildren().add(run);
-			bottom.setAlignment(Pos.BOTTOM_CENTER);
-			title.getStyleClass().add("title");
-			center.getStyleClass().add("center");
-			bp.setTop(title);
-			bp.setCenter(center);
-			bp.setBottom(bottom);
-			Scene scene = new Scene(bp,650,650);
-			//Scene scene = new Scene(maze,500,600);
-			scene.getStylesheets().add("application/application.css");
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
-			maze.startGame();
+			maze.startGame(gameResult);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
