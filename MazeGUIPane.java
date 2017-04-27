@@ -11,9 +11,9 @@ public class MazeGUIPane extends GridPane{
 	int rowMax = 25;
 	int colMax = 25;
 	Runner runner;
-	int bullTurns; // 3
-	int numBulls; // 2
-	int turnsBeforeRelease; // 3
+	int bullTurns; // Best: 3
+	int numBulls; // Best: 2
+	int turnsBeforeRelease; // Best: 3
 	int turnsLeft;
 	StreetMap map = new StreetMap(rowMax, colMax);
 	boolean gameOver = false;
@@ -178,7 +178,6 @@ public class MazeGUIPane extends GridPane{
 			l.getStyleClass().add("runner");
 			map.getMap()[row][col] = new Coordinate(row, col, 'R');
 		}else{
-			
 			if((int)(Math.random() * (5 - 1) + 1) == 1){
 				l.getStyleClass().add("wall");
 				map.getMap()[row][col] = new Coordinate(row, col, 'W');
