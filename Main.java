@@ -14,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.input.KeyEvent;
 
 public class Main extends Application {
 	
@@ -32,6 +31,7 @@ public class Main extends Application {
 			bp.getStyleClass().add("grid");
 			Label titleName = new Label("Map of Pamplona");
 			titleName.setTextFill(Color.CHARTREUSE);
+			gameResult.setTextFill(Color.YELLOW);
 			title.getChildren().add(titleName);
 			title.setAlignment(Pos.TOP_CENTER);
 			center.getChildren().add(maze);
@@ -41,7 +41,7 @@ public class Main extends Application {
 			run.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 				public void handle(Event event) {
 					gameResult.setText("");
-					maze.startGame(gameResult);
+					maze.startGame(gameResult, 3, 2, 3);
 				}
 			});
 			bottom.getChildren().addAll(run, gameResult);
@@ -73,7 +73,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.show();
-			maze.startGame(gameResult);
+			maze.startGame(gameResult, 3, 2, 3);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

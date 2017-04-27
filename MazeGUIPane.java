@@ -11,18 +11,21 @@ public class MazeGUIPane extends GridPane{
 	int rowMax = 25;
 	int colMax = 25;
 	Runner runner;
-	int bullTurns = 3;
-	int numBulls = 2;
-	int turnsBeforeRelease = 3;
+	int bullTurns; // 3
+	int numBulls; // 2
+	int turnsBeforeRelease; // 3
 	int turnsLeft;
 	StreetMap map = new StreetMap(rowMax, colMax);
 	boolean gameOver = false;
 	Bull[] bulls;
 	Label gameResult;
 
-	public void startGame(Label mainLabel){
+	public void startGame(Label mainLabel, int turnsBeforeRelease, int numBulls, int bullTurns){
 		setUpLabels();
 		gameResult = mainLabel;
+		this.turnsBeforeRelease = turnsBeforeRelease;
+		this.numBulls = numBulls;
+		this.bullTurns = bullTurns;
 		runner = new Runner(1, 1);
 		turnsLeft = turnsBeforeRelease;
 		gameOver = false;
